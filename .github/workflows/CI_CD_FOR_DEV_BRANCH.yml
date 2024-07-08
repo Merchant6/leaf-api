@@ -14,15 +14,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      name: Deploy app to VPS
-      uses: appleboy/ssh-action@master 
-      with: 
-          host: ${{ secrets.DEPLOY_HOST }}
-          port: ${{ secrets.DEPLOY_PORT }}
-          username: ${{ secrets.DEPLOY_USER }}
-          password: ${{ secrets.DEPLOY_PASS }} 
-          script:
-            cd /var/www/html/leaf-api
-            git pull origin dev
-            php composer.phar install
+      - name: Deploy app to VPS
+        uses: appleboy/ssh-action@master 
+        with: 
+            host: ${{ secrets.DEPLOY_HOST }}
+            port: ${{ secrets.DEPLOY_PORT }}
+            username: ${{ secrets.DEPLOY_USER }}
+            password: ${{ secrets.DEPLOY_PASS }} 
+            script: |
+              cd /var/www/html/leaf-api
+              git pull origin dev
+              php composer.phar install
                 
