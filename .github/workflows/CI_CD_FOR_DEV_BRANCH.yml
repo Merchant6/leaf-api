@@ -24,6 +24,6 @@ jobs:
             script: |
               cd /var/www/html/leaf-api
               git pull origin dev
-              php composer.phar install
+              composer install
               php leaf db:migrate -f data
                 
