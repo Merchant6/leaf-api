@@ -11,21 +11,6 @@ class ParamsController extends Controller
         $request = request();
         $data = $request->params();
         
-        // $validatedData = $request->validate([
-        //     'first-name' => 'required|textOnly',
-        //     'last-name' => 'required|textOnly',
-        //     'email' => 'required|email',
-        //     'phone' => 'required|number',
-        //     'address' => 'required|text',
-        //     'city' => 'required|text',
-        //     'state' => 'required|text',
-        //     'zip' => 'required|number',
-        //     'cc' => 'required|creditCard',
-        //     'cvv' => 'required|number',
-        //     'expiry-month' => 'required|number|between:[1,12]',
-        //     'expiry-year' => 'required|number',
-        // ]);
-
         $validatedData = $request->validate([
             'first-name' => 'required|textOnly',
             'last-name' => 'required|textOnly',
@@ -51,8 +36,14 @@ class ParamsController extends Controller
             'payload' => $encoded
           ]);
 
+        if($insert){
+          return response()->json([
+            'message' => 'Your message has been sent successfully.',
+          ], 200);
+        }
+
         return response()->json([
-            'message' => $insert,
-        ], 200);
+          'message' => 'There was an error sending your message, please try again later.',
+        ], 422);
     }
 }
